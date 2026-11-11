@@ -1,0 +1,33 @@
+Hackathon GOW 2026 · Desafio Fortuna Crédito
+============================================
+
+Nesta pasta
+-----------
+- fortuna_hackathon.dump .......... backup do banco (PostgreSQL 16 ou mais novo)
+- Hackathon GOW 2026 Manual do Participante.pdf
+- Dicionário de dados.pdf ......... tabelas, campos e exemplos
+
+1. Restaure o backup
+--------------------
+  createdb fortuna
+  pg_restore --no-owner --no-privileges -d fortuna fortuna_hackathon.dump
+  psql -d fortuna -c "SELECT tipo_base, count(*) FROM hackathon.pedidos GROUP BY 1"
+
+  Esperado: historico = 10000 e novo = 2000.
+
+2. API do bureau de crédito
+---------------------------
+  Endereço: https://gowlab-fortuna-bureau.azurewebsites.net
+
+  GET  /v1/bureau/{id_cliente}
+       Authorization: Bearer <token do seu time>
+  GET  /health   (sem token, para testar a conexão)
+
+  O token do seu time chega em mensagem privada. Não compartilhe.
+  Parte das chamadas falha com 503 ou demora alguns segundos, de propósito.
+
+3. Entrega
+----------
+  - Arquivo: <identificador do time>_final.csv (selic, spread, liquidez, hedge ou dividendos)
+  - Pasta do seu time no canal do Teams, até 15h30. Sem tolerância.
+  - Quer conferir o formato antes? Mande o arquivo no canal e peça a validação, quantas vezes quiser até 15h30.
